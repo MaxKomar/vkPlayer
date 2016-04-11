@@ -1,0 +1,13 @@
+<div class="duration">
+    <input title="duration" id="durationRange" type="range" min="0" max="100" step = "0.1" [value] = currentTimePercent>
+    <div>
+        <span>{{currentTime}}</span>
+        <span>{{duration}}</span>
+    </div>
+</div>
+<div class="controls">
+    <button (click)="audio.play()">play</button>
+    <button (click)="audio.pause()">pause</button>
+</div>
+
+
