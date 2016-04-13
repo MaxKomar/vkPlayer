@@ -1,13 +1,20 @@
-<div class="duration">
-    <input title="duration" id="durationRange" type="range" min="0" max="100" step = "0.1" [value] = currentTimePercent>
-    <div>
-        <span>{{currentTime}}</span>
-        <span>{{duration}}</span>
+<!--<div class="playerWrapper">-->
+    <div class="playControl">
+        <div (click)="play()" [hidden] = isPlay >
+            <i class="fa fa-play-circle" aria-hidden="true"></i>
+        </div>
+        <div (click)="pause()" [hidden] = !isPlay>
+            <i class="fa fa-pause-circle" aria-hidden="true"></i>
+        </div>
     </div>
-</div>
-<div class="controls">
-    <button (click)="audio.play()">play</button>
-    <button (click)="audio.pause()">pause</button>
-</div>
+    <slider [amount] = currentTimePercent [buffered] = buffered></slider>
 
+    <div class="duration">
+        <div>
+            <span>{{currentTime}}</span>
+            <span>{{duration}}</span>
+        </div>
+    </div>
 
+    <input type="text" [(ngModel)] = audioSrc (change)="updateAudioSrc()">
+<!--</div>-->

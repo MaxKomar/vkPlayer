@@ -1,39 +1,65 @@
 import {Component} from 'angular2/core';
 import HasCallback from '../../hellperClasses/hasCallbacks'
+import Slider from '../../directives/slider/slider'
 
 @Component({
     selector: 'player',
-    templateUrl: "app/components/player/player.html"
+    templateUrl: "app/components/player/player.html",
+    directives: [Slider]
 })
 
-class Player extends HasCallback{
-    audio = new Audio();
-    duration: string = "0:00";
-    currentTime: string = "0:00";
-    currentTimePercent = 0;
+class Player extends HasCallback {
+    private audio = new Audio();
+    duration:string = "0:00";
+    currentTime:string = "0:00";
+    currentTimePercent:number = 0;
+    buffered:number = 0;
+    isPlay:boolean = false;
+    audioSrc:string = "https://cs7-2v4.vk-cdn.net/p19/995192814a0503.mp3?extra=MrmhAVNOiw4-eHitvTXLuaKzCiH9z-pl8Fzn8RAZccGo1pLYFCV2dyJSHGFdqGcG7xuLInKmCAKA9hY4yojioKm5y7TNywhOlf2UjmpBjNfIcr_ameOjY1EAaMSO0doXB6EuSZt7m5w"
 
-    constructor (){
+    constructor() {
         super();
-        this.audio.src = "https://cs7-1v4.vk-cdn.net/p14/45af7c7f8238bf.mp3?extra=tDOF2m4V7GkWZIojXW1HxTLFNeIcIayk6H4bRRYu6b4hkTu67CGWo4cHuYXO91XKWXCA3M3pHZ_vE-N3OGzGtwq-1PT7DgX2mv6iPEPdZw_D-lAphkZx2rKgDfXuTLMjYOp-_uKcQ_H1";
+        this.audio.src = this.audioSrc;
         this.audio.addEventListener("loadedmetadata", this.cb_setDuration);
         this.audio.addEventListener("timeupdate", this.cb_timeUpdate);
+        this.audio.addEventListener("progress", this.cb_buffered);
     }
 
-    cb_setDuration(): void{
-        var durMins : number = Math.floor(this.audio.duration / 60);
-        var durSecs : any = Math.floor(this.audio.duration - durMins*60);
+    play():void {
+        this.isPlay = true;
+        this.audio.play();
+    }
+
+    pause():void {
+        this.isPlay = false;
+        this.audio.pause();
+    }
+
+    updateAudioSrc():void {
+        this.audio.src = this.audioSrc;
+    }
+
+    cb_setDuration():void {
+        console.log(this.audio);
+        var durMins:number = Math.floor(this.audio.duration / 60);
+        var durSecs:any = Math.floor(this.audio.duration - durMins * 60);
         durSecs < 10 ? durSecs = '0' + durSecs : null;
         this.duration = `${durMins}:${durSecs}`;
     }
 
-    cb_timeUpdate(): void{
-        this.currentTimePercent = this.audio.currentTime * (100  / this.audio.duration);
-        var durMins : number = Math.floor(this.audio.currentTime / 60);
-        var durSecs : any = Math.floor(this.audio.currentTime - durMins*60);
-        if(durSecs < 10) {
+    cb_timeUpdate():void {
+        this.currentTimePercent = this.audio.currentTime * (100 / this.audio.duration);
+        var durMins:number = Math.floor(this.audio.currentTime / 60);
+        var durSecs:any = Math.floor(this.audio.currentTime - durMins * 60);
+        if (durSecs < 10) {
             durSecs = `0${durSecs}`;
         }
         this.currentTime = `${durMins}:${durSecs}`;
+    }
+
+    cb_buffered():void {
+        var bufferedMs:number = this.audio.buffered.end(this.audio.buffered.length - 1);
+        this.buffered = bufferedMs * (100 / this.audio.duration);
     }
 
 }
