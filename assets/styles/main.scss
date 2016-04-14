@@ -19,15 +19,21 @@ player {
     float: left;
     width: 100px;
   }
+
+  .lengthSlider {
+    padding: 9px;
+    height: 22px;
+    box-sizing: border-box;
+    width: auto;
+    overflow: hidden;
+  }
 }
 
 slider {
-  width: auto;
-  overflow: hidden;
-  padding: 9px;
-  height: 22px;
   display: block;
-  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
 
   .sliderWrapper {
     height: 4px;
@@ -49,11 +55,20 @@ slider {
       height: 100%;
       transition: width 0.5s linear;
     }
+
+    .handler {
+      top: 0;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      transition: top 100ms linear, width 100ms linear, height 100ms linear, margin-left 100ms linear, opacity 160ms linear, left 500ms linear;
+    }
   }
 
   &:hover {
     .sliderWrapper {
       .handler {
+        opacity: 1;
         height: 10px;
         width: 10px;
         border-radius: 50%;
@@ -61,7 +76,6 @@ slider {
         position: absolute;
         top: -3px;
         margin-left: -5px;
-        transition: left 0.5s linear;
       }
     }
   }

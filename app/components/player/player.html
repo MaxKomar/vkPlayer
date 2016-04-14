@@ -7,7 +7,10 @@
             <i class="fa fa-pause-circle" aria-hidden="true"></i>
         </div>
     </div>
-    <slider [amount] = currentTimePercent [buffered] = buffered></slider>
+
+    <div class="lengthSlider">
+        <slider [amount] = currentTimePercent [buffered] = buffered (slide) = slideTime($event)></slider>
+    </div>
 
     <div class="duration">
         <div>

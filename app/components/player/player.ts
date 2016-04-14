@@ -15,7 +15,7 @@ class Player extends HasCallback {
     currentTimePercent:number = 0;
     buffered:number = 0;
     isPlay:boolean = false;
-    audioSrc:string = "https://cs7-1v4.vk-cdn.net/p24/3e2a553506e4a0.mp3?extra=jXbmOWZbWp8mvNK2PdphSCWYBACZuhj9lAy6Xc-l2bkue6j-Gx7pTMXOGuz4N--7243Qo7dUxc5gAaxV5DxdeE-EqnKKnhin2e0T4pvrKsKN4l22tZFvNpvPwgZuJQmHTYJQRq3ob6o"
+    audioSrc:string = "https://cs7-3v4.vk-cdn.net/p13/21c2e0ea3ff039.mp3?extra=gXVdDrnYJZfGGNgCe8R3iYGpWywQVKM2Hh963LYCGtSLk5AJ0Hz5uniOejWgAUAgLQqTMVhoSBGoch_rNky0arsM2ZvYldfJBOeEVv3qLMsoy9b3vljSAOSP6NnaiPtRISalS-ElXCc";
     constructor() {
         super();
         this.audio.src = this.audioSrc;
@@ -38,8 +38,12 @@ class Player extends HasCallback {
         this.audio.src = this.audioSrc;
     }
 
+    slideTime(timePercent):void{
+        this.currentTimePercent = timePercent;
+        this.audio.currentTime = Math.round(this.audio.duration/100 * timePercent);
+    }
+
     cb_setDuration():void {
-        console.log(this.audio);
         var durMins:number = Math.floor(this.audio.duration / 60);
         var durSecs:any = Math.floor(this.audio.duration - durMins * 60);
         durSecs < 10 ? durSecs = '0' + durSecs : null;
@@ -63,7 +67,6 @@ class Player extends HasCallback {
             this.buffered = bufferedMs * (100 / this.audio.duration);
         }
     }
-
 }
 export default Player;
 
