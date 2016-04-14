@@ -22,25 +22,47 @@ player {
 }
 
 slider {
-  position: relative;
   width: auto;
   overflow: hidden;
-  margin: 9px;
-  height: 4px;
+  padding: 9px;
+  height: 22px;
   display: block;
-  background-color: #CACACA;
+  box-sizing: border-box;
 
-  .buffered {
-    position: absolute;
-    top: 0;
-    background-color: #b8c7d7;
-    height: 100%;
+  .sliderWrapper {
+    height: 4px;
+    position: relative;
+    background-color: #CACACA;
+
+    .buffered {
+      position: absolute;
+      top: 0;
+      background-color: #b8c7d7;
+      height: 100%;
+      transition: width 0.5s linear;
+    }
+
+    .amount {
+      position: absolute;
+      top: 0;
+      background-color: #577ca1;
+      height: 100%;
+      transition: width 0.5s linear;
+    }
   }
 
-  .amount {
-    position: absolute;
-    top: 0;
-    background-color: #577ca1;
-    height: 100%;
+  &:hover {
+    .sliderWrapper {
+      .handler {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background-color: #577ca1;
+        position: absolute;
+        top: -3px;
+        margin-left: -5px;
+        transition: left 0.5s linear;
+      }
+    }
   }
 }

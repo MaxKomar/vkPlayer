@@ -15,8 +15,7 @@ class Player extends HasCallback {
     currentTimePercent:number = 0;
     buffered:number = 0;
     isPlay:boolean = false;
-    audioSrc:string = "https://cs7-2v4.vk-cdn.net/p19/995192814a0503.mp3?extra=MrmhAVNOiw4-eHitvTXLuaKzCiH9z-pl8Fzn8RAZccGo1pLYFCV2dyJSHGFdqGcG7xuLInKmCAKA9hY4yojioKm5y7TNywhOlf2UjmpBjNfIcr_ameOjY1EAaMSO0doXB6EuSZt7m5w"
-
+    audioSrc:string = "https://cs7-1v4.vk-cdn.net/p24/3e2a553506e4a0.mp3?extra=jXbmOWZbWp8mvNK2PdphSCWYBACZuhj9lAy6Xc-l2bkue6j-Gx7pTMXOGuz4N--7243Qo7dUxc5gAaxV5DxdeE-EqnKKnhin2e0T4pvrKsKN4l22tZFvNpvPwgZuJQmHTYJQRq3ob6o"
     constructor() {
         super();
         this.audio.src = this.audioSrc;

@@ -2,9 +2,7 @@ import {Component, Input} from 'angular2/core';
 
 @Component ({
     selector: 'slider',
-    template: '<div class="buffered" [ngStyle] = "{\'width\': buffered + \'%\'}"></div>' +
-    '<div class="amount" [ngStyle] = "{\'width\': amount + \'%\'}"></div>' +
-    '<div class="handler"></div>'
+    templateUrl: "/app/directives/slider/slider.html"
 })
 
 export default class Slider {
