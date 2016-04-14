@@ -57,8 +57,11 @@ class Player extends HasCallback {
     }
 
     cb_buffered():void {
-        var bufferedMs:number = this.audio.buffered.end(this.audio.buffered.length - 1);
-        this.buffered = bufferedMs * (100 / this.audio.duration);
+        var bufferedLength:number = this.audio.buffered.length;
+        if(bufferedLength > 0){
+            var bufferedMs:number = this.audio.buffered.end(bufferedLength - 1);
+            this.buffered = bufferedMs * (100 / this.audio.duration);
+        }
     }
 
 }
